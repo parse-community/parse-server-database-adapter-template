@@ -1,0 +1,38 @@
+name: ci
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches:
+      - '**'
+    paths-ignore:
+      - '**/**.md'
+jobs:
+  run-parse-server-ci:
+    name: CI of Parse Server ${{ matrix.version }}
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: ['5.0.0', '6.0.0']
+    steps:
+    - name: Checkout parse-server ${{ matrix.version }}
+      uses: actions/checkout@v2
+      with:
+        repository: parse-community/parse-server
+        ref: ${{ matrix.version }}
+        path: parse-server
+    - name: Run CI workflow of Parse Server
+      uses: actions/github-script@v5
+      with:
+        script: |
+          const fs = require('fs');
+          const yaml = require('js-yaml');
+          const path = './parse-server/.github/workflows/ci.yml';
+          const ciConfig = yaml.load(fs.readFileSync(path, 'utf8'));
+          console.log(ciConfig);
+          return ciConfig;
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
