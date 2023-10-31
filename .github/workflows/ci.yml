@@ -23,10 +23,7 @@ jobs:
         ref: ${{ matrix.version }}
         path: parse-server
     - name: Run CI workflow of Parse Server
-      uses: actions/github-script@v6
-      with:
-        script: |
-          ls
+      run: cd parse-server
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
