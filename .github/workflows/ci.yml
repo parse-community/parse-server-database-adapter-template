@@ -25,9 +25,8 @@ jobs:
     - name: Run CI workflow of Parse Server
       uses: actions/github-script@v6
       with:
-       script: |
-        cd parse-server
-        ls
+        script: |
+          ls
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
