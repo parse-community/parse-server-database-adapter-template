@@ -22,16 +22,16 @@ jobs:
         repository: parse-community/parse-server
         ref: ${{ matrix.version }}
         path: parse-server
-    # - name: Run CI workflow of Parse Server
-    #   uses: actions/github-script@v6
-    #   with:
-        # script: |
-        #   const fs = require('fs');
-        #   const yaml = require('js-yaml');
-        #   const path = './parse-server/.github/workflows/ci.yml';
-        #   const ciConfig = yaml.load(fs.readFileSync(path, 'utf8'));
-        #   console.log(ciConfig);
-        #   return ciConfig;
+    - name: Run CI workflow of Parse Server
+      uses: actions/github-script@v6
+      with:
+       script: |
+         const fs = require('fs');
+         const yaml = require('js-yaml');
+         const path = './parse-server/.github/workflows/ci.yml';
+         const ciConfig = yaml.load(fs.readFileSync(path, 'utf8'));
+         console.log(ciConfig);
+         return ciConfig;
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
