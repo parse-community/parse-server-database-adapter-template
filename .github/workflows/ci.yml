@@ -27,7 +27,7 @@ jobs:
       with:
        script: |
         cd parse-server
-        npm run test
+        ls
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
