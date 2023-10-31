@@ -23,7 +23,7 @@ jobs:
         ref: ${{ matrix.version }}
         path: parse-server
     - name: cd to Parse Server
-      run: cd parse-server; ls
+      run: cd parse-server; ls; npm run test
 #    - name: Run CI workflow of Parse Server
 #      run: npm run test
 
