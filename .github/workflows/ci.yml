@@ -22,10 +22,8 @@ jobs:
         repository: parse-community/parse-server
         ref: ${{ matrix.version }}
         path: parse-server
-    - name: cd to Parse Server
+    - name: Run Tests
       run: cd parse-server; ls; npm install; npm run test
-#    - name: Run CI workflow of Parse Server
-#      run: npm run test
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
