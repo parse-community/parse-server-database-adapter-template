@@ -23,8 +23,9 @@ jobs:
         ref: ${{ matrix.version }}
         path: parse-server
     - name: Run Tests
-      run: cd parse-server; ls; npm install; npm run test
-
+      run: cd parse-server; 
+           npm install; 
+           npm run test
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
