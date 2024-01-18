@@ -37,7 +37,7 @@ jobs:
       run: docker run --name free23c -d -p 1521:1521 -e ORACLE_PWD=Welcome12345 container-registry.oracle.com/database/free:latest;
            docker ps -a;
     - name: Wait for container
-      run: sleep 60;
+      run: sleep 120;
            docker ps -a;
     - name: Run Tests
       run: cd parse-server; 
