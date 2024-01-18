@@ -44,10 +44,10 @@ jobs:
       run: sleep 120;
            docker ps -a;
            ./sqlcl/bin/sql -V;
-#    - name: Run Tests
-#      run: cd parse-server; 
-#           npm install; 
-#           npm run test
+    - name: Run Tests
+      run: cd parse-server; 
+           npm install; 
+           npm run test
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
