@@ -37,6 +37,7 @@ jobs:
       run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
            unzip sqlcl-23.3.0.270.1251.zip ;
            pwd;
+           echo $HOME;
            ls -la sqlcl;
            ls -la sqlcl/bin;
            ./sqlcl/bin/sql -V;
