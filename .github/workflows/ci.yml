@@ -25,7 +25,6 @@ jobs:
     - name: Create Oracle Storage Adapter Dir
       run: mkdir parse-server/src/Adapters/Storage/Oracle;
            ls -la parse-server/src/Adapters/Storage/Oracle;
-           docker info;
     - name: Checkout Oracle Storage Adapter
       uses: actions/checkout@v2
       with:
@@ -34,6 +33,9 @@ jobs:
         path: parse-server/src/Adapters/Storage/Oracle
     - name: Validate Oracle Dir
       run: ls -la parse-server/src/Adapters/Storage/Oracle;
+    - name: Run Free23c
+      run: docker run --name free23c -d -p 1521:1521 -e ORACLE_PWD=Welcome12345 container-registry.oracle.com/database/free:latest;
+           docker ps -a;
     - name: Run Tests
       run: cd parse-server; 
            npm install; 
