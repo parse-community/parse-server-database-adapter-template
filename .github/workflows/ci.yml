@@ -35,7 +35,7 @@ jobs:
       run: ls -la parse-server/src/Adapters/Storage/Oracle;
     - name: Install Sqlcl
       run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
-           unzip sqlcl-23.3.0.270.1251.zip ;
+           unzip sqlcl-23.3.0.270.1251.zip;
            ./sqlcl/bin/sql -V;
     - name: Run Free23c
       run: docker run --name free23c -d -p 1521:1521 -e ORACLE_PWD=Welcome12345 container-registry.oracle.com/database/free:latest;
@@ -45,7 +45,7 @@ jobs:
            docker ps -a;
            ./sqlcl/bin/sql -V;
     - name: Enable SODA in image
-      run: echo "alter session set container=FREEPDB1;\ngrant db_developer_role to pdbadmin;\ngrant soda_app to pdbadmin;\nGRANT UNLIMITED TABLESPACE TO pdbadmin;\nquit;" > soda
+      run: echo "alter session set container=FREEPDB1;\ngrant db_developer_role to pdbadmin;\ngrant soda_app to pdbadmin;\nGRANT UNLIMITED TABLESPACE TO pdbadmin;\nquit;" > soda;
            cat soda;
            ./sqlcl/bin/sql sys/Welcome12345@localhost:1521/free as sysdba @./soda
 #    - name: Run Tests
