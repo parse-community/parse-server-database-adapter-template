@@ -53,6 +53,9 @@ jobs:
         path: parse-server-database-adapter-template
     - name: Move package.json
       run: ls;
+           ls -la parse-server-database-adapter-template;
+           cp parse-server-database-adapter-template/package.json parse-server;
+           ls -la parse-server;
 #    - name: Play w SED
 #      run: which sed;
 #           sed -i '10 i sed command put me here!' sample_file.txt;
