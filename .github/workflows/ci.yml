@@ -45,12 +45,14 @@ jobs:
            wget https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
            unzip instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
            ls
-    - name: package.json
-      run: git clone git@github.com:ddrechse/parse-server-database-adapter-template.git;
-           ls -la;
-#           cp package.json parse-server;
-#           cd parse-server;
-#           cat package.json;
+    - name: Checkout package.json
+      uses: actions/checkout@v2
+      with:
+        repository: ddrechse/parse-server-database-adapter-template
+        ref: ''
+        path: parse-server-database-adapter-template
+    - name: Move package.json
+      run: ls;
 #    - name: Play w SED
 #      run: which sed;
 #           sed -i '10 i sed command put me here!' sample_file.txt;
