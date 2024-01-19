@@ -44,12 +44,12 @@ jobs:
            wget https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
            unzip instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
            ls
-    - name: Install File Adapter
-      run: npm install --save @parse/fs-files-adapter;
-           ls node_modules/@parse;
-    - name: Install Oracle for Node
-      run: npm install oracledb@6.2.0;
-           ls node_modules/oracledb;
+#    - name: Install File Adapter
+#      run: npm install --save @parse/fs-files-adapter;
+#           ls node_modules/@parse;
+#    - name: Install Oracle for Node
+#      run: npm install oracledb@6.2.0;
+#           ls node_modules/oracledb;
 #    - name: Run Free23c
 #      run: docker run --name free23c -d -p 1521:1521 -e ORACLE_PWD=Welcome12345 container-registry.oracle.com/database/free:latest;
 #           docker ps -a;
@@ -63,8 +63,11 @@ jobs:
 #           ./sqlcl/bin/sql sys/Welcome12345@localhost:1521/free as sysdba @./soda
     - name: Run Tests
       run: cd parse-server; 
-           ls node_modules;
            npm install;
+           npm install --save @parse/fs-files-adapter;
+           npm install oracledb@6.2.0;
+           ls node_modules/@parse;
+           ls node_modules/oracledb;
            ls node_modules;
            export PARSE_SERVER_DATABASE_ADAPTER='{"module":"../Adapters/Storage/Oracle/OracleStorageAdapter","options":{"databaseURI":"oracledb://pdbadmin:Welcome12345@localhost:1521/freepdb1","collectionPrefix":"test_"}}';
            echo $PARSE_SERVER_DATABASE_ADAPTER;
