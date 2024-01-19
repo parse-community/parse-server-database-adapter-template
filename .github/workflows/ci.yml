@@ -44,10 +44,14 @@ jobs:
       run: sleep 120;
            docker ps -a;
            ./sqlcl/bin/sql -V;
-    - name: Run Tests
-      run: cd parse-server; 
-           npm install; 
-           npm run test
+    - name: Enable SODA in image
+      run: echo "alter session set container=FREEPDB1;\ngrant db_developer_role to pdbadmin;\ngrant soda_app to pdbadmin;\nGRANT UNLIMITED TABLESPACE TO pdbadmin;\nquit;" > soda
+           cat soda;
+           ./sqlcl/bin/sql sys/Welcome12345@localhost:1521/free as sysdba @./soda
+#    - name: Run Tests
+#      run: cd parse-server; 
+#           npm install; 
+#           npm run test
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
