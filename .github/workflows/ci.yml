@@ -60,7 +60,7 @@ jobs:
     - name: ld-lib
       run: echo $LD_LIBRARY_PATH
     - name: apt
-      run: apt-get install libaio1;
+      run: sudo apt-get install libaio1;
 #    - name: Play w SED
 #      run: which sed;
 #           sed -i '10 i sed command put me here!' sample_file.txt;
