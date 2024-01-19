@@ -56,6 +56,7 @@ jobs:
            ls -la parse-server-database-adapter-template;
            cp parse-server-database-adapter-template/package.json parse-server;
            ls -la parse-server;
+           cat parse-server/spec/helper.js
 #    - name: Play w SED
 #      run: which sed;
 #           sed -i '10 i sed command put me here!' sample_file.txt;
