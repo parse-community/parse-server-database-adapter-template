@@ -52,7 +52,7 @@ jobs:
       run: uname -m;
            ls -la /lib;
            ls -al /lib/libc*;
-           ls -al /lib/glibc*
+           ls -al /lib/libc*
 #    - name: Run Tests
 #      run: cd parse-server; 
 #           npm install; 
