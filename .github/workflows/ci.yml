@@ -46,12 +46,13 @@ jobs:
            unzip instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
            ls
     - name: package.json
-      run: ls -la;
-           cp package.json parse-server;
-           cd parse-server;
-           cat package.json;
-    - name: Play w SED
-      run: which sed;
+      run: git clone git@github.com:ddrechse/parse-server-database-adapter-template.git;
+           ls -la;
+#           cp package.json parse-server;
+#           cd parse-server;
+#           cat package.json;
+#    - name: Play w SED
+#      run: which sed;
 #           sed -i '10 i sed command put me here!' sample_file.txt;
 #           cat sample_file.txt;
 #    - name: Install File Adapter
