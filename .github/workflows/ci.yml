@@ -45,11 +45,15 @@ jobs:
            wget https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
            unzip instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
            ls
+    - name: package.json
+      run: ls -la;
+           cp package.json parse-server;
+           cd parse-server;
+           cat package.json;
     - name: Play w SED
       run: which sed;
-           sed -n;
-           sed -i '10 i sed command put me here!' sample_file.txt;
-           cat sample_file.txt;
+#           sed -i '10 i sed command put me here!' sample_file.txt;
+#           cat sample_file.txt;
 #    - name: Install File Adapter
 #      run: npm install --save @parse/fs-files-adapter;
 #           ls node_modules/@parse;
