@@ -48,6 +48,8 @@ jobs:
       run: echo "alter session set container=FREEPDB1;grant db_developer_role to pdbadmin;grant soda_app to pdbadmin;GRANT UNLIMITED TABLESPACE TO pdbadmin;quit;" > soda;
            cat soda;
            ./sqlcl/bin/sql sys/Welcome12345@localhost:1521/free as sysdba @./soda
+    - name: Install Instant Client
+      run: uname -m
 #    - name: Run Tests
 #      run: cd parse-server; 
 #           npm install; 
