@@ -97,7 +97,7 @@ jobs:
            echo $PARSE_SERVER_LOG_LEVEL
            export PARSE_SERVER_DATABASE_ADAPTER='{"module":"../Adapters/Storage/Oracle/OracleStorageAdapter","options":{"databaseURI":"oracledb://pdbadmin:Welcome12345@localhost:1521/freepdb1","collectionPrefix":"test_"}}';
            echo $PARSE_SERVER_DATABASE_ADAPTER;
-           ORACLE_CLIENT_LOCATION=${PWD}/instantclient_21_13 npm run testoracle
+           ORACLE_CLIENT_LOCATION=${LD_LIBRARY_PATH}/instantclient_21_13 npm run testoracle
 #           npm run test
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
