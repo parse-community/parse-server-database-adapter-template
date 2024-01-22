@@ -45,6 +45,8 @@ jobs:
            wget https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
            unzip instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
            ls -la;
+           echo "$PWD";
+           ls -la $PWD/instantclient_21_13;
            ls -la /home/runner/work/parse-server-database-adapter-template/parse-server-database-adapter-template/parse-server/instantclient_21_13;
     - name: Checkout package.json
       uses: actions/checkout@v2
