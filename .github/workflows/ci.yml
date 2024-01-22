@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
 #        version: ['5.6.0', '6.3.1']
-         version: ['6.3.1']
+         version: ['alpha']
     steps:
     - name: Checkout parse-server ${{ matrix.version }}
       uses: actions/checkout@v2
