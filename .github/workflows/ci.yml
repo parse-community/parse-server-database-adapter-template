@@ -20,8 +20,8 @@ jobs:
     - name: Checkout parse-server ${{ matrix.version }}
       uses: actions/checkout@v2
       with:
-        repository: parse-community/parse-server
-        ref: ${{ matrix.version }}
+        repository: ddrechse/parse-server
+        ref: realDBAdapterLoader
         path: parse-server
     - name: Create Oracle Storage Adapter Dir
       run: mkdir parse-server/src/Adapters/Storage/Oracle;
@@ -44,39 +44,61 @@ jobs:
            ls -al /lib/libc*;
            wget https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
            unzip instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
-           ls
-    - name: Play w SED
-      run: which sed;
-           sed -n;
-           sed -i '10 i sed command put me here!' sample_file.txt;
-           cat sample_file.txt;
+           ls -la;
+           echo "$PWD";
+           ls -la $PWD/instantclient_21_13;
+           ls -la /home/runner/work/parse-server-database-adapter-template/parse-server-database-adapter-template/instantclient_21_13;
+    - name: Checkout package.json
+      uses: actions/checkout@v2
+      with:
+        repository: ddrechse/parse-server-database-adapter-template
+        ref: ''
+        path: parse-server-database-adapter-template
+    - name: Move package.json
+      run: ls;
+           ls -la parse-server-database-adapter-template;
+           cp parse-server-database-adapter-template/package.json parse-server;
+           ls -la parse-server;
+           cat parse-server/spec/helper.js
+    - name: Install libaio1
+      run: sudo apt-get install libaio1;
+#    - name: Play w SED
+#      run: which sed;
+#           sed -i '10 i sed command put me here!' sample_file.txt;
+#           cat sample_file.txt;
 #    - name: Install File Adapter
 #      run: npm install --save @parse/fs-files-adapter;
 #           ls node_modules/@parse;
 #    - name: Install Oracle for Node
 #      run: npm install oracledb@6.2.0;
 #           ls node_modules/oracledb;
-#    - name: Run Free23c
-#      run: docker run --name free23c -d -p 1521:1521 -e ORACLE_PWD=Welcome12345 container-registry.oracle.com/database/free:latest;
-#           docker ps -a;
-#    - name: Wait for container
-#      run: sleep 120;
-#           docker ps -a;
-#           ./sqlcl/bin/sql -V;
-#    - name: Enable SODA in image
-#      run: echo "alter session set container=FREEPDB1;grant db_developer_role to pdbadmin;grant soda_app to pdbadmin;GRANT UNLIMITED TABLESPACE TO pdbadmin;quit;" > soda;
-#           cat soda;
-#           ./sqlcl/bin/sql sys/Welcome12345@localhost:1521/free as sysdba @./soda
+    - name: Run Free23c
+      run: docker run --name free23c -d -p 1521:1521 -e ORACLE_PWD=Welcome12345 container-registry.oracle.com/database/free:latest;
+           docker ps -a;
+    - name: Wait for container
+      run: sleep 120;
+           docker ps -a;
+           ./sqlcl/bin/sql -V;
+    - name: Enable SODA in image
+      run: echo "alter session set container=FREEPDB1;grant db_developer_role to pdbadmin;grant soda_app to pdbadmin;GRANT UNLIMITED TABLESPACE TO pdbadmin;quit;" > soda;
+           cat soda;
+           ./sqlcl/bin/sql sys/Welcome12345@localhost:1521/free as sysdba @./soda
     - name: Run Tests
-      run: cd parse-server; 
+      run: echo $PWD;
+           echo "Before setting LIB PATH";
+           export LD_LIBRARY_PATH=${PWD}/instantclient_21_13;
+           echo "This is LD LIBRARY PATH";
+           echo $LD_LIBRARY_PATH; 
+           cd parse-server; 
            npm install;
            npm install --save @parse/fs-files-adapter;
            npm install oracledb@6.2.0;
-           ls node_modules/@parse;
-           ls node_modules/oracledb;
-           ls node_modules;
+           export UV_THREADPOOL_SIZE=128;
+           export PARSE_SERVER_TEST_DB=oracle;
            export PARSE_SERVER_DATABASE_ADAPTER='{"module":"../Adapters/Storage/Oracle/OracleStorageAdapter","options":{"databaseURI":"oracledb://pdbadmin:Welcome12345@localhost:1521/freepdb1","collectionPrefix":"test_"}}';
            echo $PARSE_SERVER_DATABASE_ADAPTER;
+           ORACLE_CLIENT_LOCATION=${LD_LIBRARY_PATH} npm run test
+#           ORACLE_CLIENT_LOCATION=${LD_LIBRARY_PATH} npm run testoracle
 #           npm run test
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
