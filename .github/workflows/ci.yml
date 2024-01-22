@@ -9,7 +9,7 @@ on:
       - '**/**.md'
 jobs:
   run-parse-server-ci:
-    name: CI of Parse Server ${{ matrix.version }}
+    name: CI of Parse Server 
     timeout-minutes: 15
     runs-on: ubuntu-latest
     strategy:
