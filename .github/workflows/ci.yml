@@ -40,11 +40,11 @@ jobs:
            ./sqlcl/bin/sql -V;
     - name: Install Instant Client
       run: uname -m;
-           wget https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
-           unzip instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
+           wget https://download.oracle.com/otn_software/linux/instantclient/1922000/instantclient-basic-linux.x64-19.22.0.0.0dbru.zip;
+           unzip instantclient-basic-linux.x64-19.22.0.0.0dbru.zip;
            ls -la;
-           ls -la $PWD/instantclient_21_13;
-           ls -la /home/runner/work/parse-server-database-adapter-template/parse-server-database-adapter-template/instantclient_21_13;           
+           ls -la $PWD/instantclient_19_22;
+           ls -la /home/runner/work/parse-server-database-adapter-template/parse-server-database-adapter-template/instantclient_19_22;           
     - name: Install libaio1
       run: sudo apt-get install libaio1;
     - name: Checkout OraSepcs  
@@ -84,7 +84,7 @@ jobs:
     - name: Run Tests
       run: echo $PWD;
            echo "Before setting LIB PATH";
-           export LD_LIBRARY_PATH=${PWD}/instantclient_21_13;
+           export LD_LIBRARY_PATH=${PWD}/instantclient_19_22;
            echo "This is LD LIBRARY PATH";
             echo $LD_LIBRARY_PATH; 
            cd parse-server; 
