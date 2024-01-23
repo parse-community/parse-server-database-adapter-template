@@ -51,10 +51,9 @@ jobs:
            ./sqlcl/bin/sql -V;
     - name: Install Instant Client
       run: uname -m;
-           ls -la /lib;
-           ls -al /lib/libc*;
-           wget https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
-           unzip instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
+           wget https://download.oracle.com/otn_software/mac/instantclient/1916000/instantclient-basic-macos.x64-19.16.0.0.0dbru.dmg;
+           hdiutil attach instantclient-basic-macos.x64-19.16.0.0.0dbru.dmg;
+           ls /Volumes;
            ls -la;
            echo "$PWD";
            ls -la $PWD/instantclient_21_13;
