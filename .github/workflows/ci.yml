@@ -9,13 +9,13 @@ on:
       - '**/**.md'
 jobs:
   run-parse-server-ci:
-    name: CI of Parse Server ${{ matrix.version }}
-    timeout-minutes: 15
+    name: CI of Parse Server 
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     strategy:
       matrix:
 #        version: ['5.6.0', '6.3.1']
-         version: ['6.3.1']
+         version: ['alpha']
     steps:
     - name: Checkout parse-server ${{ matrix.version }}
       uses: actions/checkout@v2
@@ -48,33 +48,22 @@ jobs:
            echo "$PWD";
            ls -la $PWD/instantclient_21_13;
            ls -la /home/runner/work/parse-server-database-adapter-template/parse-server-database-adapter-template/instantclient_21_13;
-    - name: Checkout package.json
-      uses: actions/checkout@v2
-      with:
-        repository: ddrechse/parse-server-database-adapter-template
-        ref: ''
-        path: parse-server-database-adapter-template
-    - name: Move package.json
-      run: ls;
-           ls -la parse-server-database-adapter-template;
-           cp parse-server-database-adapter-template/package.json parse-server;
-           ls -la parse-server;
-           cat parse-server/spec/helper.js
     - name: Install libaio1
       run: sudo apt-get install libaio1;
-#    - name: Play w SED
-#      run: which sed;
-#           sed -i '10 i sed command put me here!' sample_file.txt;
-#           cat sample_file.txt;
-#    - name: Install File Adapter
-#      run: npm install --save @parse/fs-files-adapter;
-#           ls node_modules/@parse;
-#    - name: Install Oracle for Node
-#      run: npm install oracledb@6.2.0;
-#           ls node_modules/oracledb;
+    - name: Checkout OraSepcs  
+      uses: actions/checkout@v2
+      with:
+            repository: ddrechse/parse-server
+            ref: oraSpecs
+            path: ora-specs
+    - name: Validate oraSpecs
+      run:  ls -la ora-specs;
+            cp -R ./ora-specs/spec ./parse-server;
+            ls -la parse-server/spec;
     - name: Run Free23c
       run: docker run --name free23c -d -p 1521:1521 -e ORACLE_PWD=Welcome12345 container-registry.oracle.com/database/free:latest;
            docker ps -a;
+           docker info;
     - name: Wait for container
       run: sleep 120;
            docker ps -a;
@@ -88,7 +77,7 @@ jobs:
            echo "Before setting LIB PATH";
            export LD_LIBRARY_PATH=${PWD}/instantclient_21_13;
            echo "This is LD LIBRARY PATH";
-           echo $LD_LIBRARY_PATH; 
+            echo $LD_LIBRARY_PATH; 
            cd parse-server; 
            npm install;
            npm install --save @parse/fs-files-adapter;
@@ -99,7 +88,6 @@ jobs:
            echo $PARSE_SERVER_DATABASE_ADAPTER;
            ORACLE_CLIENT_LOCATION=${LD_LIBRARY_PATH} npm run test
 #           ORACLE_CLIENT_LOCATION=${LD_LIBRARY_PATH} npm run testoracle
-#           npm run test
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
