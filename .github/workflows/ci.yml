@@ -42,9 +42,11 @@ jobs:
            export PATH="/usr/local/opt/openjdk@11/bin:$PATH";
            java --version;
            export JAVA_HOME="/usr/local/opt/openjdk@11/bin";
+           echo $JAVA_HOME;
     - name: Install Sqlcl
       run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
            unzip sqlcl-23.3.0.270.1251.zip;
+           export JAVA_HOME="/usr/local/opt/openjdk@11/bin";
            echo $JAVA_HOME;
            ./sqlcl/bin/sql -V;
     - name: Install Instant Client
