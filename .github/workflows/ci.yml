@@ -11,7 +11,7 @@ jobs:
   run-parse-server-ci:
     name: CI of Parse Server 
     timeout-minutes: 60
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
 #        version: ['5.6.0', '6.3.1']
@@ -33,41 +33,20 @@ jobs:
         ref: ''
         path: parse-server/src/Adapters/Storage/Oracle
     - name: Validate Oracle Dir
-      run: ls -la parse-server/src/Adapters/Storage/Oracle;
-    - name: Install Java 11
-      run: wget https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh;
-           brew update;
-           brew install java11;
-           sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk;
-           export PATH="/usr/local/opt/openjdk@11/bin:$PATH";
-           java --version;
-           export JAVA_HOME="/usr/local/opt/openjdk@11";
-           echo $JAVA_HOME;
+      run: ls -la parse-server/src/Adapters/Storage/Oracle;  
     - name: Install Sqlcl
       run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
            unzip sqlcl-23.3.0.270.1251.zip;
-           export JAVA_HOME="/usr/local/opt/openjdk@11";
-           echo $JAVA_HOME;
            ./sqlcl/bin/sql -V;
     - name: Install Instant Client
       run: uname -m;
-           wget https://download.oracle.com/otn_software/mac/instantclient/1916000/instantclient-basic-macos.x64-19.16.0.0.0dbru.dmg;
-           hdiutil attach instantclient-basic-macos.x64-19.16.0.0.0dbru.dmg;
-           ls -la /Volumes;
-           ls -la /Volumes/instantclient-basic-macos.x64-19.16.0.0.0dbru;
-           sudo cp -R /Volumes/instantclient-basic-macos.x64-19.16.0.0.0dbru instantclient-basic-macos.x64-19.16.0.0.0;
-           cd instantclient-basic-macos.x64-19.16.0.0.0;
-           echo "Installing Instant Client w Shell Script";
-           ./install_ic.sh;
-           cd ..;
-           echo "Successfully installed Instant Client w Shell Script";
+           wget https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
+           unzip instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
            ls -la;
-           echo "$PWD";
-           ls -la $PWD/instantclient-basic-macos.x64-19.16.0.0.0;
-           echo $USER;
-           ls -la /Users/$USER/Downloads/instantclient_19_16
-#    - name: Install libaio1
-#      run: brew install libaio;
+           ls -la $PWD/instantclient_21_13;
+           ls -la /home/runner/work/parse-server-database-adapter-template/parse-server-database-adapter-template/instantclient_21_13;           
+    - name: Install libaio1
+      run: sudo apt-get install libaio1;
     - name: Checkout OraSepcs  
       uses: actions/checkout@v2
       with:
@@ -105,7 +84,7 @@ jobs:
     - name: Run Tests
       run: echo $PWD;
            echo "Before setting LIB PATH";
-           export LD_LIBRARY_PATH=/Users/$USER/Downloads/instantclient_19_16;
+           export LD_LIBRARY_PATH=${PWD}/instantclient_21_13;
            echo "This is LD LIBRARY PATH";
             echo $LD_LIBRARY_PATH; 
            cd parse-server; 
