@@ -11,7 +11,7 @@ jobs:
   run-parse-server-ci:
     name: CI of Parse Server 
     timeout-minutes: 60
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     strategy:
       matrix:
 #        version: ['5.6.0', '6.3.1']
@@ -34,6 +34,13 @@ jobs:
         path: parse-server/src/Adapters/Storage/Oracle
     - name: Validate Oracle Dir
       run: ls -la parse-server/src/Adapters/Storage/Oracle;
+    - name: Install Java 11
+      run: java --version;
+           /bin/bash -c “$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)”;
+           brew update;
+           brew install java11;
+           sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk;
+           java --version;
     - name: Install Sqlcl
       run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
            unzip sqlcl-23.3.0.270.1251.zip;
