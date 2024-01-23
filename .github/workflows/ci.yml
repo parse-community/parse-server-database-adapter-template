@@ -67,7 +67,7 @@ jobs:
            echo $USER;
            ls -la /Users/$USER/Downloads/instantclient_19_16
     - name: Install libaio1
-      run: sudo apt-get install libaio1;
+      run: brew install libaio;
     - name: Checkout OraSepcs  
       uses: actions/checkout@v2
       with:
@@ -105,7 +105,7 @@ jobs:
     - name: Run Tests
       run: echo $PWD;
            echo "Before setting LIB PATH";
-           export LD_LIBRARY_PATH=${PWD}/instantclient_21_13;
+           export LD_LIBRARY_PATH=/Users/$USER/Downloads/instantclient_19_16;
            echo "This is LD LIBRARY PATH";
             echo $LD_LIBRARY_PATH; 
            cd parse-server; 
