@@ -67,6 +67,7 @@ jobs:
       run: ls;
            ls -la parse-server-database-adapter-template;
            cp parse-server-database-adapter-template/package.json parse-server;
+           cp parse-server-database-adapter-template/OracleStorageAdapter.js parse-server/src/Adapters/Storage/Oracle;
            ls -la parse-server;
            cat parse-server/spec/helper.js                     
     - name: Run Free23c
