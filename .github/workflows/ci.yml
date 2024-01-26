@@ -99,7 +99,11 @@ jobs:
            mkdir oralogs;
            docker cp free23c:</opt/oracle/diag/rdbms/free/FREE/trace/alert_*.log oralogs;
            ls -la oralogs;
-#           ORACLE_CLIENT_LOCATION=${LD_LIBRARY_PATH} npm run test
+    - name: Archive Test Results
+      if: always()
+      run: mkdir oralogs;
+           docker cp free23c:/opt/oracle/diag/rdbms/free/FREE/trace oralogs;
+           ls -la oralogs;
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
