@@ -105,6 +105,7 @@ jobs:
            docker cp free23c:/opt/oracle/diag/rdbms/free/FREE/trace oralogs;
            ls -la oralogs;
     - name: Archive Test Results
+      if: always()
       uses: actions/upload-artifact@v1
       with:
        name: containerlogs
