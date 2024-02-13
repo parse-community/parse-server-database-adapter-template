@@ -97,8 +97,8 @@ jobs:
            echo $PARSE_SERVER_DATABASE_ADAPTER;
            ORACLE_CLIENT_LOCATION=${LD_LIBRARY_PATH} npm run testoracle;
            mkdir oralogs;
-           docker cp free23c:</opt/oracle/diag/rdbms/free/FREE/trace/alert_*.log oralogs;
-           ls -la oralogs;
+#           docker cp free23c:</opt/oracle/diag/rdbms/free/FREE/trace/alert_*.log oralogs;
+#           ls -la oralogs;
     - name: Dump Container logs
       if: always()
       run: mkdir oralogs;
