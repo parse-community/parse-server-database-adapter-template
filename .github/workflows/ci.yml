@@ -88,6 +88,7 @@ jobs:
            export LD_LIBRARY_PATH=${PWD}/instantclient_19_22;
            echo "This is LD LIBRARY PATH";
            echo $LD_LIBRARY_PATH; 
+           echo "Just the one suite";
            cd parse-server; 
            npm install;
            npm install --save @parse/fs-files-adapter;
