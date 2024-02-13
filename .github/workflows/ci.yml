@@ -79,7 +79,7 @@ jobs:
            docker ps -a;
            ./sqlcl/bin/sql -V;
     - name: Enable SODA in image
-      run: echo "alter session set container=FREEPDB1;grant db_developer_role to pdbadmin;grant soda_app to pdbadmin;GRANT UNLIMITED TABLESPACE TO pdbadmin;quit;" > soda;
+      run: echo "alter system set pga_aggregate_limit=4G scope=memory;alter session set container=FREEPDB1;grant db_developer_role to pdbadmin;grant soda_app to pdbadmin;GRANT UNLIMITED TABLESPACE TO pdbadmin;quit;" > soda;
            cat soda;
            ./sqlcl/bin/sql sys/Welcome12345@localhost:1521/free as sysdba @./soda
     - name: Run Tests
