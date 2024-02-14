@@ -88,7 +88,7 @@ jobs:
            export LD_LIBRARY_PATH=${PWD}/instantclient_19_22;
            echo "This is LD LIBRARY PATH";
            echo $LD_LIBRARY_PATH; 
-           echo "1 second timeout implemented correctly";
+           echo "Run it again";
            cd parse-server; 
            npm install;
            npm install --save @parse/fs-files-adapter;
