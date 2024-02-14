@@ -45,8 +45,8 @@ jobs:
            ls -la;
            ls -la $PWD/instantclient_19_22;
            ls -la /home/runner/work/parse-server-database-adapter-template/parse-server-database-adapter-template/instantclient_19_22;           
- #   - name: Install libaio1
- #     run: sudo apt-get install libaio1;
+    - name: Install libaio1
+      run: sudo apt-get install libaio1;
     - name: Checkout OraSepcs  
       uses: actions/checkout@v2
       with:
