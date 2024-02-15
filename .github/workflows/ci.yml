@@ -54,6 +54,14 @@ jobs:
       run: brew install docker;
            colima start;
            docker info;
+    - name: Run Free23c
+      run: docker run --name free23c -d -p 1521:1521 -e ORACLE_PWD=Welcome12345 container-registry.oracle.com/database/free:latest;
+           docker ps -a;
+           docker info;
+    - name: Wait for container
+      run: sleep 120;
+           docker ps -a;
+#           ./sqlcl/bin/sql -V;           
 #            brew install --cask docker;
 #           open -a docker && while ! docker info > /dev/null 2>&1; do sleep 1 ; done
 #           docker info;
