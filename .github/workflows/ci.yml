@@ -39,23 +39,14 @@ jobs:
            wget https://download.oracle.com/java/17/latest/jdk-17_macos-x64_bin.tar.gz;
            gunzip jdk-17_macos-x64_bin.tar.gz;
            chmod 777 jdk-17_macos-x64_bin.tar;
-           ls -la;
-           tar --help;
            tar -xf jdk-17_macos-x64_bin.tar;
-           ls -la;
-           ls -la jdk-17.0.10.jdk;
-           ls -la jdk-17.0.10.jdk/Contents;
-           ls -la jdk-17.0.10.jdk/Contents/Home;
-           ls -la jdk-17.0.10.jdk/Contents/MacOS;
-           ls -la jdk-17.0.10.jdk/Contents/Home/bin;
            export PATH=${PWD}/jdk-17.0.10.jdk/Contents/Home/bin:$PATH;
            echo $PATH;
            java --version;
-#           which java;
-#    - name: Install Sqlcl
-#      run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
-#           unzip sqlcl-23.3.0.270.1251.zip;
-#           ./sqlcl/bin/sql -V;
+    - name: Install Sqlcl
+      run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
+           unzip sqlcl-23.3.0.270.1251.zip;
+           ./sqlcl/bin/sql -V;
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true           
