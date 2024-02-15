@@ -36,9 +36,9 @@ jobs:
       run: ls -la parse-server/src/Adapters/Storage/Oracle; 
     - name: Install Java 11
       run: java -version;
-           brew update;
-           brew install java11;
-           java -version;
+           wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz;
+           gunzip jdk-21_linux-x64_bin.tar.gz;
+           ls -la;
 #           which java;
 #    - name: Install Sqlcl
 #      run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
