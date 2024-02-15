@@ -1,0 +1,45 @@
+name: ci
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches:
+      - '**'
+    paths-ignore:
+      - '**/**.md'
+jobs:
+  run-parse-server-ci:
+    name: CI of Parse Server 
+    timeout-minutes: 60
+    runs-on: macos-latest
+    strategy:
+      matrix:
+#        version: ['5.6.0', '6.3.1']
+         version: ['alpha']
+    steps:
+    - name: Checkout parse-server ${{ matrix.version }}
+      uses: actions/checkout@v2
+      with:
+        repository: ddrechse/parse-server
+        ref: realDBAdapterLoader
+        path: parse-server
+    - name: Create Oracle Storage Adapter Dir
+      run: mkdir parse-server/src/Adapters/Storage/Oracle;
+           ls -la parse-server/src/Adapters/Storage/Oracle;
+    - name: Checkout Oracle Storage Adapter
+      uses: actions/checkout@v2
+      with:
+        repository: oracle-samples/oracleadapter-parse
+        ref: ''
+        path: parse-server/src/Adapters/Storage/Oracle
+    - name: Validate Oracle Dir
+      run: ls -la parse-server/src/Adapters/Storage/Oracle; 
+    - name: Install Java 11
+      run: brew update;
+    - name: Install Sqlcl
+      run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
+           unzip sqlcl-23.3.0.270.1251.zip;
+           ./sqlcl/bin/sql -V;
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true           
