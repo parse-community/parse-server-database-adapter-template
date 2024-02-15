@@ -51,7 +51,9 @@ jobs:
            unzip sqlcl-23.3.0.270.1251.zip;
            ./sqlcl/bin/sql -V;
     - name: Install Docker
-      run: docker info;
+      run: brew install --cask docker;
+           open /Applications/Docker.app;
+           docker info;
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true           
