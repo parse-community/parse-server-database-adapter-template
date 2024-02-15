@@ -52,6 +52,7 @@ jobs:
            ./sqlcl/bin/sql -V;
     - name: Install Docker
       run: brew install --cask docker;
+           open -a docker && while ! docker info > /dev/null 2>&1; do sleep 1 ; done
            docker info;
 #           open /Applications/Docker.app;
 #           docker info;
