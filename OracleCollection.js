@@ -26,13 +26,13 @@ export default class OracleCollection {
 
   async getCollectionConnection() {
     // To support backwards compatibility with instant clients
-/*    const mymetadata = {
+    const mymetadata = {
       keyColumn: { name: 'ID', assignmentMethod: 'UUID' },
       contentColumn: { name: 'JSON_DOCUMENT', sqlType: 'JSON' },
       versionColumn: { name: 'VERSION', method: 'UUID' },
       lastModifiedColumn: { name: 'LAST_MODIFIED' },
       creationTimeColumn: { name: 'CREATED_ON' },
-    };*/
+    };
 
 //    console.log( "Metadata = " + JSON.stringify(mymetadata));
     console.log("No Connection Metadata");
@@ -60,12 +60,12 @@ export default class OracleCollection {
       .then(async coll => {
         if (!coll) {
           logger.verbose('getCollectionConnection create NEW collection for  ' + this._name);
-//          const newCollection = await this._oracleSodaDB.createCollection(this._name, {
-//            metaData: mymetadata,
-//          });
+          const newCollection = await this._oracleSodaDB.createCollection(this._name, {
+            metaData: mymetadata,
+          });
 
 
-          const newCollection = await this._oracleSodaDB.createCollection(this._name);
+//          const newCollection = await this._oracleSodaDB.createCollection(this._name);
           /*
             Create index on _id for every new collection
             This imitates Mongo behavior which happens automatically
