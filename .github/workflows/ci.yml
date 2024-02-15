@@ -51,9 +51,11 @@ jobs:
            unzip sqlcl-23.3.0.270.1251.zip;
            ./sqlcl/bin/sql -V;
     - name: Install Docker
-      run: brew install --cask docker;
-           open -a docker && while ! docker info > /dev/null 2>&1; do sleep 1 ; done
-           docker info;
+      run: brew install docker;
+           colima start;
+#            brew install --cask docker;
+#           open -a docker && while ! docker info > /dev/null 2>&1; do sleep 1 ; done
+#           docker info;
 #           open /Applications/Docker.app;
 #           docker info;
 concurrency:
