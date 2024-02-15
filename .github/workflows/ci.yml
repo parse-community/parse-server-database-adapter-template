@@ -50,7 +50,7 @@ jobs:
            ls -la jdk-17.0.10.jdk/Contents/Home/bin;
            export PATH=${PWD}/jdk-17.0.10.jdk/Contents/Home/bin:$PATH;
            echo $PATH;
-           java;
+           java --version;
 #           which java;
 #    - name: Install Sqlcl
 #      run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
