@@ -36,12 +36,12 @@ jobs:
       run: ls -la parse-server/src/Adapters/Storage/Oracle; 
     - name: Install Java 11
       run: java -version;
-           wget jdk-11.interim.update.patch_macos-x64_bin.tar.gz;
-           gunzip jdk-11.interim.update.patch_macos-x64_bin.tar.gz
-           chmod 777 jdk-11.interim.update.patch_macos-x64_bin.tar;
+           wget https://download.oracle.com/java/17/latest/jdk-17_macos-x64_bin.tar.gz;
+           gunzip jdk-17_macos-x64_bin.tar.gz;
+           chmod 777 jdk-17_macos-x64_bin.tar;
            ls -la;
            tar --help;
-           tar -xf jdk-11.interim.update.patch_macos-x64_bin.tar;
+           tar -xf jdk-17_macos-x64_bin.tar;
            ls -la;
 #           ls -la jdk-21.0.2;
 #           ls -la jdk-21.0.2/bin;
