@@ -53,6 +53,7 @@ jobs:
     - name: Install Docker
       run: brew install docker;
            colima start;
+           docker info;
 #            brew install --cask docker;
 #           open -a docker && while ! docker info > /dev/null 2>&1; do sleep 1 ; done
 #           docker info;
