@@ -33,7 +33,9 @@ jobs:
         ref: ''
         path: parse-server/src/Adapters/Storage/Oracle
     - name: Validate Oracle Dir
-      run: ls -la parse-server/src/Adapters/Storage/Oracle;  
+      run: ls -la parse-server/src/Adapters/Storage/Oracle; 
+    - name: Install Java 11
+      run: brew update;
     - name: Install Sqlcl
       run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
            unzip sqlcl-23.3.0.270.1251.zip;
