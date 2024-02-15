@@ -45,6 +45,9 @@ jobs:
            java --version;
     - name: Install Sqlcl
       run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
+           echo $JAVA_HOME;
+           export JAVA_HOME=${PWD}/jdk-17.0.10.jdk/Contents/Home/bin;
+           echo $JAVA_HOME;
            unzip sqlcl-23.3.0.270.1251.zip;
            ./sqlcl/bin/sql -V;
 concurrency:
