@@ -40,7 +40,7 @@ jobs:
            gunzip jdk-21_linux-x64_bin.tar.gz;
            chmod 777 jdk-21_linux-x64_bin.tar;
            ls -la;
-           tar -help;
+           tar --help;
            tar -xf jdk-21_linux-x64_bin.tar;
            ls -la;
 #           which java;
