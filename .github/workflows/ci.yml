@@ -44,10 +44,10 @@ jobs:
            tar -xf jdk-17_macos-x64_bin.tar;
            ls -la;
            ls -la jdk-17.0.10.jdk;
-           ls -la jdk-17.0.10.jdk/bin;
-           export PATH=${PWD}/jdk-17.0.10.jdk/bin:$PATH;
-           echo $PATH;
-           java;
+           ls -la jdk-17.0.10.jdk/Contents;
+#           export PATH=${PWD}/jdk-17.0.10.jdk/bin:$PATH;
+#           echo $PATH;
+#           java;
 #           which java;
 #    - name: Install Sqlcl
 #      run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
