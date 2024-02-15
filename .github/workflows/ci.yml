@@ -39,8 +39,9 @@ jobs:
            brew install java11;
            echo "PERFORMING SYMLINK"
            sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk;
-#           export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
-#           echo $PATH;
+           ls -la /usr/local/opt/openjdk@11/libexec/openjdk.jdk;
+           export PATH=/usr/local/opt/openjdk@11/bin:$PATH
+           echo $PATH;
 #           java --version;
     - name: Install Sqlcl
       run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
