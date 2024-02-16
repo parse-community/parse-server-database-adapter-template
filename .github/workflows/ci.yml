@@ -11,7 +11,7 @@ jobs:
   run-parse-server-ci:
     name: CI of Parse Server 
     timeout-minutes: 60
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
 #        version: ['5.6.0', '6.3.1']
@@ -33,40 +33,92 @@ jobs:
         ref: ''
         path: parse-server/src/Adapters/Storage/Oracle
     - name: Validate Oracle Dir
-      run: ls -la parse-server/src/Adapters/Storage/Oracle; 
-    - name: Install Java 11
-      run: java -version;
-           wget https://download.oracle.com/java/17/latest/jdk-17_macos-x64_bin.tar.gz;
-           gunzip jdk-17_macos-x64_bin.tar.gz;
-           chmod 777 jdk-17_macos-x64_bin.tar;
-           tar -xf jdk-17_macos-x64_bin.tar;
-           export PATH=${PWD}/jdk-17.0.10.jdk/Contents/Home/bin:$PATH;
-           echo $PATH;
-           java --version;
+      run: ls -la parse-server/src/Adapters/Storage/Oracle;  
     - name: Install Sqlcl
       run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
-           echo $JAVA_HOME;
-           export JAVA_HOME=${PWD}/jdk-17.0.10.jdk/Contents/Home;
-           echo $JAVA_HOME;
            unzip sqlcl-23.3.0.270.1251.zip;
            ./sqlcl/bin/sql -V;
-    - name: Install Docker
-      run: brew install docker;
-           colima start;
-           docker info;
+    - name: Install Instant Client
+      run: uname -m;
+           wget https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
+           unzip instantclient-basic-linux.x64-21.13.0.0.0dbru.zip;
+           ls -la;
+           ls -la $PWD/instantclient_21_13;
+           ls -la /home/runner/work/parse-server-database-adapter-template/parse-server-database-adapter-template/instantclient_21_13;           
+    - name: Install libaio1
+      run: sudo apt-get install libaio1;
+    - name: Checkout OraSepcs  
+      uses: actions/checkout@v2
+      with:
+            repository: ddrechse/parse-server
+            ref: oraSpecs
+            path: ora-specs
+    - name: Validate oraSpecs
+      run:  ls -la ora-specs;
+            cp -R ./ora-specs/spec ./parse-server;
+            ls -la parse-server/spec;
+    - name: Checkout package.json
+      uses: actions/checkout@v2
+      with:
+        repository: ddrechse/parse-server-database-adapter-template
+        ref: ''
+        path: parse-server-database-adapter-template
+    - name: Move package.json
+      run: ls;
+           ls -la parse-server-database-adapter-template;
+           cp parse-server-database-adapter-template/package.json parse-server;
+           cp parse-server-database-adapter-template/OracleStorageAdapter.js parse-server/src/Adapters/Storage/Oracle;
+           cp parse-server-database-adapter-template/OracleCollection.js parse-server/src/Adapters/Storage/Oracle;
+           ls -la parse-server;
+           cat parse-server/spec/helper.js                     
     - name: Run Free23c
       run: docker run --name free23c -d -p 1521:1521 -e ORACLE_PWD=Welcome12345 container-registry.oracle.com/database/free:latest;
            docker ps -a;
            docker info;
     - name: Wait for container
-      run: sleep 300;
+      run: sleep 120;
            docker ps -a;
-#           ./sqlcl/bin/sql -V;           
-#            brew install --cask docker;
-#           open -a docker && while ! docker info > /dev/null 2>&1; do sleep 1 ; done
-#           docker info;
-#           open /Applications/Docker.app;
-#           docker info;
+           ./sqlcl/bin/sql -V;
+    - name: Enable SODA in image
+      run: echo "alter system set pga_aggregate_limit=4G scope=memory;alter session set container=FREEPDB1;grant db_developer_role to pdbadmin;grant soda_app to pdbadmin;GRANT UNLIMITED TABLESPACE TO pdbadmin;quit;" > soda;
+           cat soda;
+           ./sqlcl/bin/sql sys/Welcome12345@localhost:1521/free as sysdba @./soda
+    - name: Run Tests
+      run: echo $PWD;
+           echo "Before setting LIB PATH";
+           export LD_LIBRARY_PATH=${PWD}/instantclient_21_13;
+           echo "This is LD LIBRARY PATH";
+           echo $LD_LIBRARY_PATH; 
+           echo "No connection metadata used";
+           cd parse-server; 
+           npm install;
+           npm install --save @parse/fs-files-adapter;
+           npm install oracledb@6.3.0;
+           export PARSE_SERVER_DATABASE_ADAPTER='{"module":"../Adapters/Storage/Oracle/OracleStorageAdapter","options":{"databaseURI":"oracledb://pdbadmin:Welcome12345@localhost:1521/freepdb1","collectionPrefix":"test_"}}';
+           echo $PARSE_SERVER_DATABASE_ADAPTER;
+           ORACLE_CLIENT_LOCATION=${LD_LIBRARY_PATH} npm run testoracle;
+           mkdir oralogs;
+#           docker cp free23c:</opt/oracle/diag/rdbms/free/FREE/trace/alert_*.log oralogs;
+#           ls -la oralogs;
+    - name: Dump Container logs
+      if: always()
+      run: mkdir oralogs;
+           docker cp free23c:/opt/oracle/diag/rdbms/free/FREE/trace oralogs;
+           docker cp free23c:/opt/oracle/diag/rdbms/free/FREE oradumps;
+           ls -la oralogs;
+           ls -la oradumps;
+    - name: Archive Test Results
+      if: always()
+      uses: actions/upload-artifact@v1
+      with:
+       name: containerlogs
+       path: oralogs/trace 
+    - name: Archive Test Results
+      if: always()
+      uses: actions/upload-artifact@v1
+      with:
+       name: containerdumps
+       path: oradumps       
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true           
+  cancel-in-progress: true
