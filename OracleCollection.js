@@ -34,9 +34,6 @@ export default class OracleCollection {
       creationTimeColumn: { name: 'CREATED_ON' },
     };
 
-//    console.log( "Metadata = " + JSON.stringify(mymetadata));
-    console.log("No Connection Metadata");
-
     logger.verbose('getCollectionConnection about to connect for collection ' + this._name);
     let localConn;
     this._oracleCollection = await this._oracleStorageAdapter
