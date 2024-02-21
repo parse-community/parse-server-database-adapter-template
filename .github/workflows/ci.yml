@@ -37,6 +37,7 @@ jobs:
     - name: Upload 23 Instant Client
       run: wget --no-check-certificate 'https://drive.google.com/file/d/1PxhDHyT0VfUT7WV3I4_dvV7TrrRg3zvh/view?usp=sharing' -O basic.zip;
            ls -la;
+           chmod 777 basic.zip;
            unzip basic.zip;
            ls -la basic;
 #    - name: Install Sqlcl
