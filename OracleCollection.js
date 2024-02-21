@@ -1277,7 +1277,7 @@ export default class OracleCollection {
 
   async _createIndex(indexSpec) {
     let localConn = null;
-
+    console.log('_createIndex index spec is ' + JSON.stringify(indexSpec));
     logger.verbose('_createIndex index spec is ' + JSON.stringify(indexSpec));
     return await this.getCollectionConnection()
       .then(async conn => {
