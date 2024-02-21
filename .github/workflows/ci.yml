@@ -38,6 +38,10 @@ jobs:
       run: pip install gdown;
            gdown --id 1PxhDHyT0VfUT7WV3I4_dvV7TrrRg3zvh;
            ls -la;
+           chmod 777 basic.zip;
+           unzip basic.zip;
+           ls -la;
+           ls -la basic;
 #    - name: Install Sqlcl
 #      run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
 #           unzip sqlcl-23.3.0.270.1251.zip;
