@@ -35,7 +35,7 @@ jobs:
     - name: Validate Oracle Dir
       run: ls -la parse-server/src/Adapters/Storage/Oracle;  
     - name: Upload 23 Instant Client
-      run: wget -O basic.zip --no-check-certificate -r 'https://drive.google.com/uc?export=download&id=1PxhDHyT0VfUT7WV3I4_dvV7TrrRg3zvh';
+      run: wget -O basic.zip --no-check-certificate -r 'https://drive.google.com/file/d/1PxhDHyT0VfUT7WV3I4_dvV7TrrRg3zvh/view?usp=drive_link';
            ls -la;
            chmod 777 basic.zip;
            unzip basic.zip;
