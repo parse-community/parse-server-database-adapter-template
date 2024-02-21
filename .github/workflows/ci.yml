@@ -35,7 +35,7 @@ jobs:
     - name: Validate Oracle Dir
       run: ls -la parse-server/src/Adapters/Storage/Oracle;  
     - name: Upload 23 Instant Client
-      run: wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=FILEID' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1PxhDHyT0VfUT7WV3I4_dvV7TrrRg3zvh" -O basic.zip && rm -rf /tmp/cookies.txt;
+      run: wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1PxhDHyT0VfUT7WV3I4_dvV7TrrRg3zvh' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1PxhDHyT0VfUT7WV3I4_dvV7TrrRg3zvh" -O basic.zip && rm -rf /tmp/cookies.txt;
            ls -la;
            chmod 777 basic.zip;
            unzip basic.zip;
