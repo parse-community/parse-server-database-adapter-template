@@ -35,11 +35,7 @@ jobs:
     - name: Validate Oracle Dir
       run: ls -la parse-server/src/Adapters/Storage/Oracle;  
     - name: Upload 23 Instant Client
-      run: wget -O basic.zip --no-check-certificate -r 'https://drive.google.com/file/d/1PxhDHyT0VfUT7WV3I4_dvV7TrrRg3zvh/view?usp=drive_link';
-           ls -la;
-           chmod 777 basic.zip;
-           unzip basic.zip;
-           ls -la basic;
+      run: pip install gdown;
 #    - name: Install Sqlcl
 #      run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
 #           unzip sqlcl-23.3.0.270.1251.zip;
