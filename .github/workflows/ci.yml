@@ -41,7 +41,7 @@ jobs:
            chmod 777 basic.zip;
            unzip basic.zip;
            ls -la;
-           ls -la basic;
+           ls -la instantclient_23_4;
 #    - name: Install Sqlcl
 #      run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
 #           unzip sqlcl-23.3.0.270.1251.zip;
