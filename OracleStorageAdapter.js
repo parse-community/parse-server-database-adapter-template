@@ -350,6 +350,7 @@ export class OracleStorageAdapter implements StorageAdapter {
     // }
     logger.error('in handleError with error =' + error);
     console.log('in handleError with error =' + error);
+    console.trace();
     // What to throw?  Maybe need to map ORA msgs to Parse msgs
     // throw error.message;
     throw error;
