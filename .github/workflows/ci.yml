@@ -36,8 +36,9 @@ jobs:
       run: ls -la parse-server/src/Adapters/Storage/Oracle;  
     - name: Upload 23 Instant Client
       run: wget --no-check-certificate 'https://drive.google.com/file/d/1PxhDHyT0VfUT7WV3I4_dvV7TrrRg3zvh/view?usp=sharing' -O basic.zip;
-    - name: ls
-      run: ls -la;
+           ls -la;
+           unzip basic.zip;
+           ls -la basic;
 #    - name: Install Sqlcl
 #      run: wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-23.3.0.270.1251.zip;
 #           unzip sqlcl-23.3.0.270.1251.zip;
