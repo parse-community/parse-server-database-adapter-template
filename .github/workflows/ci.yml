@@ -71,7 +71,7 @@ jobs:
         repository: ddrechse/parse-server-database-adapter-template
         ref: ''
         path: parse-server-database-adapter-template
-    - name: Move package.json
+    - name: Move package.json, OracleStorageAdapter and OracleCollection
       run: ls;
            ls -la parse-server-database-adapter-template;
            cp parse-server-database-adapter-template/package.json parse-server;
