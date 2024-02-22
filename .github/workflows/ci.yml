@@ -71,7 +71,7 @@ jobs:
         repository: ddrechse/parse-server-database-adapter-template
         ref: ''
         path: parse-server-database-adapter-template
-    - name: Move package.json
+    - name: Move package.json, OracleStorageAdapter and OracleCollection
       run: ls;
            ls -la parse-server-database-adapter-template;
            cp parse-server-database-adapter-template/package.json parse-server;
@@ -98,7 +98,7 @@ jobs:
            export LD_LIBRARY_PATH=${PWD}/instantclient_23_4;
            echo "This is LD LIBRARY PATH";
            echo $LD_LIBRARY_PATH; 
-           echo "Kick it";
+           echo "Audience Router";
            cd parse-server; 
            npm install;
            npm install --save @parse/fs-files-adapter;
