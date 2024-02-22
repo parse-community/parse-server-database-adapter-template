@@ -1238,8 +1238,8 @@ export default class OracleCollection {
     return this.getCollectionConnection()
       .then(conn => {
         localConn = conn;
-//	return this._oracleCollection.truncate();
-        return this._oracleCollection.find().remove();
+      	return this._oracleCollection.truncate();
+//       return this._oracleCollection.find().remove();
       })
       .finally(() => {
         if (localConn) {
