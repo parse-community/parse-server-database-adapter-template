@@ -28,7 +28,7 @@ export default class OracleCollection {
     // To support backwards compatibility with instant clients
     const mymetadata = {
       keyColumn: { name: 'ID', assignmentMethod: 'UUID' },
-      contentColumn: { name: 'JSON_DOCUMENT', sqlType: 'JSON' },
+      contentColumn: { name: 'JSON_DOCUMENT', sqlType: 'BLOB' },
       versionColumn: { name: 'VERSION', method: 'UUID' },
       lastModifiedColumn: { name: 'LAST_MODIFIED' },
       creationTimeColumn: { name: 'CREATED_ON' },
