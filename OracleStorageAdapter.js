@@ -925,13 +925,13 @@ export class OracleStorageAdapter implements StorageAdapter {
       // TODO: This code made maxLength = 1 which caused all kinds of breakage
       //       Determine the better way to do this but for now, default to 2000 which is what the JSON console did
       //    const maxLength = indexCreationRequest[Object.keys(indexCreationRequest)[0]];
-//      const maxLength = 2000;
+      const maxLength = 2000;
       const indexRequest = {
         name: fieldName,
         fields: [
           {
             path: fieldName,
-//            maxlength: maxLength,
+            maxlength: maxLength,
           },
         ],
         unique: true,
@@ -966,13 +966,13 @@ export class OracleStorageAdapter implements StorageAdapter {
       // TODO: This code made maxLength = 1 which caused all kinds of breakage
       //       Determine the better way to do this but for now, default to 2000 which is what the JSON console did
       //    const maxLength = indexCreationRequest[Object.keys(indexCreationRequest)[0]];
-//      const maxLength = 2000;
+      const maxLength = 2000;
       const indexRequest = {
         name: fieldName,
         fields: [
           {
             path: fieldName,
-//            maxlength: maxLength,
+            maxlength: maxLength,
           },
         ],
         unique: true,
