@@ -1234,7 +1234,7 @@ export default class OracleCollection {
     // Error: DPI-1050: Oracle Client library is at version 19.8 but version 20.1 or higher is needed
     // for now, do it the old fashioned way with collection.find.remove
     let localConn = null;
-    console.log('Truncate collection ' + this._name);
+//    console.log('Truncate collection ' + this._name);
     return this.getCollectionConnection()
       .then(conn => {
         localConn = conn;
@@ -1279,7 +1279,7 @@ export default class OracleCollection {
 
   async _createIndex(indexSpec) {
     let localConn = null;
-    console.log('_createIndex index spec is ' + JSON.stringify(indexSpec));
+//    console.log('_createIndex index spec is ' + JSON.stringify(indexSpec));
     logger.verbose('_createIndex index spec is ' + JSON.stringify(indexSpec));
     return await this.getCollectionConnection()
       .then(async conn => {

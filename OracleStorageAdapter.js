@@ -349,8 +349,8 @@ export class OracleStorageAdapter implements StorageAdapter {
     //   logger.error('Received unauthorized error', { error: error });
     // }
     logger.error('in handleError with error =' + error);
-    console.log('in handleError with error =' + error);
-    console.trace();
+//    console.log('in handleError with error =' + error);
+//    console.trace();
     // What to throw?  Maybe need to map ORA msgs to Parse msgs
     // throw error.message;
     throw error;
