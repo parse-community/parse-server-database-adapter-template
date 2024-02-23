@@ -1126,7 +1126,7 @@ export class OracleStorageAdapter implements StorageAdapter {
     Object.keys(index).forEach(key => {
       paths.push({
         path: key,
-        maxlength: 2000,
+//        maxlength: 2000,
       });
     });
     return paths;
