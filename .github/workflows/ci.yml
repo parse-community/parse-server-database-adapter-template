@@ -98,11 +98,12 @@ jobs:
            export LD_LIBRARY_PATH=${PWD}/instantclient_23_4;
            echo "This is LD LIBRARY PATH";
            echo $LD_LIBRARY_PATH; 
-           echo "SEGV";
+           echo "Debug indexing";
            cd parse-server; 
            npm install;
            npm install --save @parse/fs-files-adapter;
            npm install oracledb@6.3.0;
+           export PARSE_SERVER_LOG_LEVEL=verbose;
            export PARSE_SERVER_DATABASE_ADAPTER='{"module":"../Adapters/Storage/Oracle/OracleStorageAdapter","options":{"databaseURI":"oracledb://pdbadmin:Welcome12345@localhost:1521/freepdb1","collectionPrefix":"test_"}}';
            echo $PARSE_SERVER_DATABASE_ADAPTER;
            ORACLE_CLIENT_LOCATION=${LD_LIBRARY_PATH} npm run testoracle;
