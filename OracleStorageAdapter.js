@@ -496,7 +496,9 @@ export class OracleStorageAdapter implements StorageAdapter {
       schema = convertParseSchemaToOracleSchema(schema);
       const oracleObject = parseObjectToOracleObjectForCreate(className, object, schema);
       const collection = this._adaptiveCollection(className);
+      console.log("CDD StorageAdapter create Object calling insert One for className + " + className);
       const result = await collection.insertOne(oracleObject, transactionalSession);
+      console.log('CDD StorageAdapter createObject insertOne returns: ' + JSON.stringify(result));
       logger.verbose('StorageAdapter createObject insertOne returns: ' + result);
       return { ops: [oracleObject] };
     } catch (error) {
