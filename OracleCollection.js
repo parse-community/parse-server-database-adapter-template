@@ -1186,15 +1186,15 @@ export default class OracleCollection {
   async insertOne(object) {
     let localConn = null;
     try {
-      console.log('CDD Collection insertOne before getConnection');
+//      console.log('CDD Collection insertOne before getConnection');
       localConn = await this.getCollectionConnection();
-      console.log('CDD Collection got connection calling insertOne for object ' + JSON.stringify(object));
+//      console.log('CDD Collection got connection calling insertOne for object ' + JSON.stringify(object));
       await this._oracleCollection.insertOne(object);
-      console.log('CDD Collection insertOne returned successfully');
+//      console.log('CDD Collection insertOne returned successfully');
       return object;
     } catch (error) {
       logger.error('error during insertOne = ' + error);
-      console.log('CDD error during insertOne = ' + error);
+//      console.log('CDD error during insertOne = ' + error);
       throw error;
     } finally {
       if (localConn) {

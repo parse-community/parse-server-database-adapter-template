@@ -304,7 +304,7 @@ export class OracleStorageAdapter implements StorageAdapter {
           connectString: tnsname,
           poolIncrement: 5,
           poolMax: 100,
-          poolMin: 3,
+          poolMin: 25,
           poolTimeout: 10,
           //  Use default of 60000 ms
           //          queueTimeout: 10,
@@ -496,9 +496,9 @@ export class OracleStorageAdapter implements StorageAdapter {
       schema = convertParseSchemaToOracleSchema(schema);
       const oracleObject = parseObjectToOracleObjectForCreate(className, object, schema);
       const collection = this._adaptiveCollection(className);
-      console.log("CDD StorageAdapter create Object calling insert One for className + " + className);
+//      console.log("CDD StorageAdapter create Object calling insert One for className + " + className);
       const result = await collection.insertOne(oracleObject, transactionalSession);
-      console.log('CDD StorageAdapter createObject insertOne returns: ' + JSON.stringify(result));
+//      console.log('CDD StorageAdapter createObject insertOne returns: ' + JSON.stringify(result));
       logger.verbose('StorageAdapter createObject insertOne returns: ' + result);
       return { ops: [oracleObject] };
     } catch (error) {
