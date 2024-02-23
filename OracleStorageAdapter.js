@@ -304,7 +304,7 @@ export class OracleStorageAdapter implements StorageAdapter {
           connectString: tnsname,
           poolIncrement: 5,
           poolMax: 100,
-          poolMin: 25,
+          poolMin: 3,
           poolTimeout: 10,
           //  Use default of 60000 ms
           //          queueTimeout: 10,
