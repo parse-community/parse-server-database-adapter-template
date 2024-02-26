@@ -99,7 +99,7 @@ jobs:
            export LD_LIBRARY_PATH=${PWD}/instantclient_23_4;
            echo "This is LD LIBRARY PATH";
            echo $LD_LIBRARY_PATH; 
-           echo "1 second sleep in before each";
+           echo "Comment out 2 tests, remove BeforeEach sleep";
            cd parse-server; 
            npm install;
            npm install --save @parse/fs-files-adapter;
