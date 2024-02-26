@@ -85,7 +85,7 @@ jobs:
            docker ps -a;
            docker info;
     - name: Wait for container
-      run: sleep 600;
+      run: sleep 120;
            docker ps -a;
            ./sqlcl/bin/sql -V;
     - name: Enable SODA in image
