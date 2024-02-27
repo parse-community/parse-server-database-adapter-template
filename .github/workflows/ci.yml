@@ -94,6 +94,7 @@ jobs:
            ./sqlcl/bin/sql sys/Welcome12345@localhost:1521/free as sysdba @./soda
     - name: Run Tests
       run: echo $PWD;
+           cat package.json;
            node --version;
            echo "Before setting LIB PATH";
            export LD_LIBRARY_PATH=${PWD}/instantclient_23_4;
