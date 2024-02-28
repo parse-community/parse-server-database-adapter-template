@@ -518,6 +518,8 @@ export class OracleStorageAdapter implements StorageAdapter {
         }
         this.handleError(err);
       }
+      console.log("Error = " + error);
+      console.trace();
       this.handleError(error);
     }
   }
