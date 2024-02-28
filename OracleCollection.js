@@ -1198,7 +1198,7 @@ export default class OracleCollection {
       localConn = await this.getCollectionConnection();
       const result1 = await localConn.execute(plsql);
 //      console.log('CDD Collection got connection calling insertOne for object ' + JSON.stringify(object));
-      await this._oracleCollection.insertOne(object);
+      const result = await this._oracleCollection.insertOneAndGet(object);
 //      console.log('CDD Collection insertOne returned successfully');
       return object;
     } catch (error) {
