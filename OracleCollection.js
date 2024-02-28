@@ -1283,11 +1283,19 @@ export default class OracleCollection {
 
   async _createIndex(indexSpec) {
     let localConn = null;
+
+    const plsql = `
+    BEGIN
+        EXECUTE IMMEDIATE ('
+        alter session set ddl_lock_timeout=300
+        ');     
+    END;`;
 //    console.log('_createIndex index spec is ' + JSON.stringify(indexSpec));
     logger.verbose('_createIndex index spec is ' + JSON.stringify(indexSpec));
     return await this.getCollectionConnection()
       .then(async conn => {
         localConn = conn;
+        await conn.execute(plsql);
         await this._oracleCollection.createIndex(indexSpec);
         return Promise.resolve;
       })
