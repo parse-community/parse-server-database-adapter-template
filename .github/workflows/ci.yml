@@ -99,7 +99,7 @@ jobs:
            export LD_LIBRARY_PATH=${PWD}/instantclient_23_4;
            echo "This is LD LIBRARY PATH";
            echo $LD_LIBRARY_PATH; 
-           echo "Disable two more again";
+           echo "AGAIN";
            cd parse-server;
            cat package.json;
            npm install;
