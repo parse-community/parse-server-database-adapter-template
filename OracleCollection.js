@@ -1345,6 +1345,7 @@ export default class OracleCollection {
           logger.verbose('Index' + JSON.stringify(indexSpec) + ' already exists');
         } else {
           logger.error('createIndex throws ' + error);
+          console.log('createIndex throws ' + error);
           throw error;
         }
       });
