@@ -1185,9 +1185,18 @@ export default class OracleCollection {
 
   async insertOne(object) {
     let localConn = null;
+
+  const plsql = `
+  BEGIN
+      EXECUTE IMMEDIATE ('
+      alter session set ddl_lock_timeout=300
+      ');     
+  END;`;
+    
     try {
 //      console.log('CDD Collection insertOne before getConnection');
       localConn = await this.getCollectionConnection();
+      const result1 = await localConn.execute(plsql);
 //      console.log('CDD Collection got connection calling insertOne for object ' + JSON.stringify(object));
       await this._oracleCollection.insertOne(object);
 //      console.log('CDD Collection insertOne returned successfully');
