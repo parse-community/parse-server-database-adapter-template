@@ -1287,7 +1287,7 @@ export default class OracleCollection {
     const plsql = `
     BEGIN
         EXECUTE IMMEDIATE ('
-        alter session set ddl_lock_timeout=300
+        alter session set ddl_lock_timeout=1000
         ');     
     END;`;
 //    console.log('_createIndex index spec is ' + JSON.stringify(indexSpec));
