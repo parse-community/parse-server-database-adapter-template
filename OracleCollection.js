@@ -369,9 +369,9 @@ export default class OracleCollection {
               return 'retry';
             }
           })
-          .finally(() => {
+          .finally(async () => {
             if (localConn) {
-              localConn.close();
+              await localConn.close();
               localConn = null;
             }
           })
@@ -444,9 +444,9 @@ export default class OracleCollection {
             return 'retry';
           }
         })
-        .finally(() => {
+        .finally(async () => {
           if (localConn) {
-            localConn.close();
+            await localConn.close();
             localConn = null;
           }
         })
@@ -485,9 +485,9 @@ export default class OracleCollection {
             localConn = conn;
             return this._oracleCollection.find().key(key).version(version).remove();
           })
-          .finally(() => {
+          .finally(async () => {
             if (localConn) {
-              localConn.close();
+              await localConn.close();
               localConn = null;
             }
           })
@@ -528,9 +528,9 @@ export default class OracleCollection {
               localConn = conn;
               return this._oracleCollection.find().key(key).version(version).remove();
             })
-            .finally(() => {
+            .finally(async () => {
               if (localConn) {
-                localConn.close();
+                await localConn.close();
                 localConn = null;
               }
             })
@@ -648,9 +648,9 @@ export default class OracleCollection {
           return 'retry';
         }
       })
-      .finally(() => {
+      .finally(async () => {
         if (localConn) {
-          localConn.close();
+          await localConn.close();
           localConn = null;
         }
       })
@@ -695,9 +695,9 @@ export default class OracleCollection {
               return 'retry';
             }
           })
-          .finally(() => {
+          .finally(async () => {
             if (localConn) {
-              localConn.close();
+              await localConn.close();
               localConn = null;
             }
           })
@@ -836,10 +836,10 @@ export default class OracleCollection {
           localConn = conn;
           findOperation = this._oracleCollection.find();
         })
-        .catch(error => {
+        .catch(async error => {
           logger.error('Error getting connection in _rawFind, ERROR =' + error);
           if (localConn) {
-            localConn.close();
+            await localConn.close();
             localConn = null;
           }
           throw error;
@@ -917,7 +917,7 @@ export default class OracleCollection {
             //query should not match on array when searching for null
             if (y === '$all' && Array.isArray(json[y]) && json[y][0] == null) {
               if (localConn) {
-                localConn.close();
+                await localConn.close();
                 localConn = null;
               }
               return [];
@@ -964,7 +964,7 @@ export default class OracleCollection {
                   typeof json[y][0] == 'object'
                 ) {
                   if (localConn) {
-                    localConn.close();
+                    await localConn.close();
                     localConn = null;
                   }
                   return [];
@@ -974,7 +974,7 @@ export default class OracleCollection {
               if (json[y].length == 0) {
                 if (y === '$in' || y === '$all') {
                   if (localConn) {
-                    localConn.close();
+                    await localConn.close();
                     localConn = null;
                   }
                   return [];
@@ -1143,9 +1143,9 @@ export default class OracleCollection {
           }
           return localDocs;
         })
-        .finally(() => {
+        .finally(async () => {
           if (localConn) {
-            localConn.close();
+            await localConn.close();
             localConn = null;
           }
         })
@@ -1153,9 +1153,9 @@ export default class OracleCollection {
           logger.error('Error running findOperation GetDocuments, ERROR =' + error);
           throw error;
         });
-    } catch (error) {
+    } catch (async error) {
       if (localConn) {
-        localConn.close();
+        await localConn.close();
         localConn = null;
       }
       logger.error('Error running _rawfind, ERROR =' + error);
@@ -1229,9 +1229,9 @@ export default class OracleCollection {
         }
         return result;
       })
-      .finally(() => {
+      .finally(async () => {
         if (localConn) {
-          localConn.close();
+          await localConn.close();
           localConn = null;
         }
       })
@@ -1254,9 +1254,9 @@ export default class OracleCollection {
       	return this._oracleCollection.truncate();
 //       return this._oracleCollection.find().remove();
       })
-      .finally(() => {
+      .finally(async () => {
         if (localConn) {
-          localConn.close();
+          await localConn.close();
           localConn = null;
         }
       })
@@ -1386,9 +1386,9 @@ export default class OracleCollection {
         const result = await this._oracleCollection.dropIndex(indexName);
         return result;
       })
-      .finally(() => {
+      .finally(async () => {
         if (localConn) {
-          localConn.close();
+          await localConn.close();
           localConn = null;
         }
       })
