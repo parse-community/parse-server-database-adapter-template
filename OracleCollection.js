@@ -1153,7 +1153,7 @@ export default class OracleCollection {
           logger.error('Error running findOperation GetDocuments, ERROR =' + error);
           throw error;
         });
-    } catch (async error) {
+    } catch (error) {
       if (localConn) {
         await localConn.close();
         localConn = null;
