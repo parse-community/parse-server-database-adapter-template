@@ -1192,8 +1192,27 @@ export default class OracleCollection {
       alter session set ddl_lock_timeout=300
       ');     
   END;`;
+
+      return this.getCollectionConnection()
+      .then(conn => {
+        localConn = conn;
+        const result1 = await localConn.execute(plsql);
+        const result = await this._oracleCollection.insertOne(object);
+        return result;
+      })
+      .finally(async () => {
+        if (localConn) {
+          await localConn.close();
+          localConn = null;
+        }
+      })
+      .catch(error => {
+        console.log('CDD error during insertOne = ' + error);
+        logger.error('error during insertOne = ' + error);
+        throw error;
+      });
     
-    try {
+/*    try {
 //      console.log('CDD Collection insertOne before getConnection');
       localConn = await this.getCollectionConnection();
       const result1 = await localConn.execute(plsql);
@@ -1209,7 +1228,7 @@ export default class OracleCollection {
       if (localConn) {
         await localConn.close();
       }
-    }
+    }*/
   }
 
   async drop() {
