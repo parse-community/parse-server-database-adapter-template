@@ -1196,8 +1196,8 @@ export default class OracleCollection {
       return this.getCollectionConnection()
       .then(conn => {
         localConn = conn;
-        const result1 = await localConn.execute(plsql);
-        const result = await this._oracleCollection.insertOne(object);
+        const result1 = localConn.execute(plsql);
+        const result = this._oracleCollection.insertOne(object);
         return result;
       })
       .finally(async () => {
