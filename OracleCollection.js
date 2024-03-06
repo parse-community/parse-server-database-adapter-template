@@ -1207,7 +1207,10 @@ export default class OracleCollection {
         }
       })
       .catch(error => {
-        console.log('CDD error during insertOne = ' + error);
+        if (error.errorNum !== 1) {
+          console.log('CDD error during insertOne = ' + error + " for Object " + JSON.stringify(object));
+          console.trace();
+        }
         logger.error('error during insertOne = ' + error);
         throw error;
       });
